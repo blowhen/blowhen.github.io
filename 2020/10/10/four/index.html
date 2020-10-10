@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    4线性表单链表不带头结点 |
+    
+    一个神奇的网站—lbw</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-four" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 class="article-title" itemprop="name">
+      4线性表单链表不带头结点
+    </h1>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/10/four/" class="article-date">
+  <time datetime="2020-10-09T16:06:59.000Z" itemprop="datePublished">2020-10-10</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+                            
+
+
+
+
+                                
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、按位序插入</span></span><br><span class="line"><span class="comment">//不带头结点操作中，除了初始化，头插，尾插，删除操作与带头结点的单链表有差别外，其它的操作基本上一样。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名  </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span><span class="comment">//定义单链表结点类型 </span></span><br><span class="line">	ElemType data;<span class="comment">//每个结点存放一个数据元素 </span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span><span class="comment">//next指针，指向下一个节点 </span></span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line"><span class="comment">//此处应注意：强调一个单链表使用LinkList、强调一个结点使用LNode *</span></span><br><span class="line"><span class="comment">//注意此时申请结点指针代码：LNode *p=(LNode *)malloc(sizeof(LNode)); </span></span><br><span class="line"><span class="comment">//注意此时申请头结点指针代码：L=(LNode *)malloc(sizeof(LNode)); （L已声明） </span></span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">bool</span> <span class="title">InitList</span><span class="params">(LinkList &amp;L)</span></span>&#123;<span class="comment">//初始化一个空的单链表 </span></span><br><span class="line"> 	L=<span class="literal">NULL</span>;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> <span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">(LinkList L)</span></span>&#123;<span class="comment">//判断单链表是否为空 </span></span><br><span class="line"> 	<span class="keyword">if</span>(L==<span class="literal">NULL</span>)</span><br><span class="line"> 	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> 	<span class="keyword">else</span></span><br><span class="line"> 	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ListInsert</span><span class="params">(LinkList &amp;L,<span class="keyword">int</span> i,ElemType e)</span></span>&#123;<span class="comment">//按位序插入,在第i个位置插入e </span></span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>)<span class="comment">//i值不合法 </span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(i==<span class="number">1</span>)&#123;<span class="comment">//插入第i个结点的操作与其他结点不同 </span></span><br><span class="line">    	LNode *s=(LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));<span class="comment">//申请结点 </span></span><br><span class="line">    	s-&gt;data=e;<span class="comment">//将值置于s的数据域 </span></span><br><span class="line">    	s-&gt;next=L;<span class="comment">//s结点的next指针指向L </span></span><br><span class="line">    	L=s;<span class="comment">//头指针L指向s（新结点） </span></span><br><span class="line">    	<span class="keyword">return</span> <span class="literal">true</span>;	</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    LNode *p;<span class="comment">//声明指针p，用于指向当前扫描到的结点 </span></span><br><span class="line">    <span class="keyword">int</span> j=<span class="number">1</span>;<span class="comment">//当前p指向的是第几个结点</span></span><br><span class="line">    <span class="comment">//注意：此时j=1 </span></span><br><span class="line">    p=L;<span class="comment">//重点，要注意在不带头结点的情况下，p指向第1个结点，而不是（第0个结点=头结点） </span></span><br><span class="line">	<span class="comment">//LNode *p=L; 此时p指向单链表第1个结点，由于此时不带头结点，故第一个结点不是头结点</span></span><br><span class="line">	<span class="comment">//此时可以等价于带头结点的LNode *p=L-&gt;next; </span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(p!=<span class="literal">NULL</span> &amp;&amp; j&lt;i<span class="number">-1</span>)&#123;<span class="comment">//循环找到第i-1个结点 </span></span><br><span class="line">    	p=p-&gt;next;</span><br><span class="line">    	j++;</span><br><span class="line">    	</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//i值不合法 </span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    LNode *s=(LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">    s-&gt;data=e;</span><br><span class="line">    s-&gt;next=p-&gt;next;</span><br><span class="line">    p-&gt;next=s;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispList</span><span class="params">(LinkList L)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"> 	LNode *p=L;<span class="comment">//定义一个结点指针p指向第一个结点</span></span><br><span class="line"> 	</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123; <span class="comment">//如果p不为空则循环</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;第%d个元素为%d\n&quot;</span>,i,p-&gt;data);</span><br><span class="line">		p=p-&gt;next;<span class="comment">//移动指针p遍历链表</span></span><br><span class="line">		i++;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkList L;</span><br><span class="line">	ListInsert(L,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">	ListInsert(L,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">	DispList(L);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/10/four/" data-id="ckg3eovrr0001qwcq28uwaj9z" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+                                    </footer>
+
+    </div>
+
+    
+        
+  <nav class="article-nav">
+    
+      <a href="/2020/10/10/five/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer</strong>
+        <div class="article-nav-title">
+          
+            5双链表带头结点
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/10/10/three/" class="article-nav-link">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">3线性表单链表带头结点</div>
+      </a>
+    
+  </nav>
+
+
+            
+
+                
+                    
+                        
+                            
+
+</article>
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 一个神奇的网站—lbw</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="一个神奇的网站—lbw"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
