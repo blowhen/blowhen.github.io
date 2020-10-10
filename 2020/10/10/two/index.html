@@ -1,209 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   
   
-  <meta name="description" content="数据结构学习总结ing
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737" />
   
-
-  
-  
-  
-  
-  
-  
-  <title>2_线性表顺序表动态数组 | 一个神奇的网站—lbw</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数据结构学习总结ing 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
-<meta property="og:type" content="article">
-<meta property="og:title" content="2_线性表顺序表动态数组">
-<meta property="og:url" content="http://blowhen.cn/2020/10/10/two/index.html">
-<meta property="og:site_name" content="一个神奇的网站—lbw">
-<meta property="og:description" content="数据结构学习总结ing 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
-<meta property="og:locale">
-<meta property="article:published_time" content="2020-10-09T16:04:40.000Z">
-<meta property="article:modified_time" content="2020-10-10T06:05:43.221Z">
-<meta property="article:author" content="李博文">
-<meta name="twitter:card" content="summary">
+  <title>
+    2_线性表顺序表动态数组 |
+    
+    一个神奇的网站—lbw</title>
   
-  
-    <link rel="icon" href="/css/images/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
   
   
 <link rel="stylesheet" href="/css/style.css">
 
   
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
-  <!-- baidu webmaster push -->
-  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+  
+<script src="/js/pace.min.js"></script>
+
 <meta name="generator" content="Hexo 5.2.0"></head>
-<body class="home blog custom-background custom-font-enabled single-author">
-  <div id="page" class="hfeed site">
-      <header id="masthead" class="site-header" role="banner">
-    <hgroup>
-      <h1 class="site-title">
-        <a href="/" title="一个神奇的网站—lbw" rel="home">一个神奇的网站—lbw</a>
-      </h1>
-      
-        <h2 class="site-description hitokoto"></h2>
-        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
-      
-    </hgroup>
 
-    <nav id="site-navigation" class="main-navigation" role="navigation">
-            <button class="menu-toggle">菜单</button>
-            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
-            <div class="menu-main-container">
-                <ul id="menu-main" class="nav-menu">
-                
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
-                
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
-                
-                </ul>
-            </div>
-    </nav>
-</header>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-two" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
-      <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-two" class="post-two post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
+    <div class="article-inner">
         
-        
+            <header class="article-header">
+                
   
-    <h1 class="entry-title article-title">
+    <h1 class="article-title" itemprop="name">
       2_线性表顺序表动态数组
     </h1>
   
+  
 
-        
-        <div class="comments-link">
+
+
+
+            </header>
             
-            <a href="javascript:void(0);" data-url="http://blowhen.cn/2020/10/10/two/" data-id="ckg3a092o0004jkcq59xlbklc" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
 
-    <div class="entry-content">
-      
-        <p>数据结构学习总结ing</p>
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/10/two/" class="article-date">
+  <time datetime="2020-10-09T16:04:40.000Z" itemprop="datePublished">2020-10-10</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+                            
+
+
+
+
+                                
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构学习总结ing</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、增加动态数组长度、按位查找、按值查找、插入、删除、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名  </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> InitSize 10<span class="comment">//顺序表的初始长度 </span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> *data;<span class="comment">//动态分配数组的指针</span></span><br><span class="line">	<span class="keyword">int</span> MaxSize;<span class="comment">//顺序表的最大容量 </span></span><br><span class="line">	<span class="keyword">int</span> length;<span class="comment">//顺序表的当前长度 </span></span><br><span class="line">&#125;SeqList;<span class="comment">//动态数组 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitList</span><span class="params">(SeqList &amp;L)</span></span>&#123;<span class="comment">//初始化顺序表（动态分配） </span></span><br><span class="line">	L.data=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(InitSize*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//用malloc申请一片连续的存储空间 </span></span><br><span class="line">	<span class="comment">//注意上述语句的malloc函数返回的是一个指针，此处强制转换为定义的数据元素类型指针 </span></span><br><span class="line">	</span><br><span class="line">	L.length=<span class="number">0</span>;<span class="comment">//顺序表长度置为0 </span></span><br><span class="line">	L.MaxSize=InitSize;<span class="comment">//顺序表的最大长度为初始长度 </span></span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">IncreaseSize</span><span class="params">(SeqList &amp;L,<span class="keyword">int</span> len)</span></span>&#123;<span class="comment">//增加动态数组的长度 </span></span><br><span class="line">	<span class="keyword">int</span> *p=L.data;<span class="comment">//声明一个指针指向顺序表的数据域，也就是将顺序表L的数据复制给数组 p[i] </span></span><br><span class="line">	L.data=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>((L.MaxSize+len)*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//用malloc申请一片连续的存储空间，长度为MaxSzie+len </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L.length;i++)<span class="comment">//将(p[i])数据复制到新区域,也就是新的顺序表L </span></span><br><span class="line">	    L.data[i]=p[i];</span><br><span class="line">	</span><br><span class="line">	L.MaxSize=L.MaxSize+len;<span class="comment">//顺序表最大长度增加len </span></span><br><span class="line">	<span class="built_in">free</span>(p);<span class="comment">//释放原来的内存空间 </span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ElemType <span class="title">GetElem</span><span class="params">(SeqList L,<span class="keyword">int</span> i)</span></span>&#123;<span class="comment">//按位查找，在顺序表L中查找第i个元素，并返回e </span></span><br><span class="line">	<span class="keyword">return</span> L.data[i<span class="number">-1</span>];<span class="comment">//直接返回第i个位置</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocateElem</span><span class="params">(SeqList L,ElemType e)</span></span>&#123;<span class="comment">//按值查找，在顺序表L中查找第一个元素值为e的元素，并返回其位序 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L.length;i++)<span class="comment">//依次遍历顺序表 </span></span><br><span class="line">	    <span class="keyword">if</span>(L.data[i]==e)</span><br><span class="line">	        <span class="keyword">return</span> i+<span class="number">1</span>;<span class="comment">//返回其位序 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//注意：动态数组插入数据时只能一个一个的插入 </span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ListInsert</span><span class="params">(SeqList &amp;L,<span class="keyword">int</span> i,<span class="keyword">int</span> e)</span></span>&#123;<span class="comment">//在顺序表的第i个位置插入值为e的数据元素 </span></span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">1</span>||i&gt; L.length+<span class="number">1</span>)<span class="comment">//判断i的范围是否有效 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>(L.length&gt;=L.MaxSize)<span class="comment">//当前存储空间已满，不能插入 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	    </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=L.length;j&gt;=i;j--)<span class="comment">//将第i个元素和之后的元素后移 </span></span><br><span class="line">	    L.data[j]=L.data[j<span class="number">-1</span>];<span class="comment">//位序=下标+1   |    下标=位序-1</span></span><br><span class="line">	L.data[i<span class="number">-1</span>]=e;<span class="comment">//在第i个位置（位序）放入e </span></span><br><span class="line">	L.length++;<span class="comment">//线性表长度加1 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ListDelete</span><span class="params">(SeqList &amp;L,<span class="keyword">int</span> i,<span class="keyword">int</span> &amp;e)</span></span>&#123;<span class="comment">//删除顺序表L中第i个位置的元素，删除成功返回e </span></span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">1</span> || i&gt;L.length)<span class="comment">//判断i的范围是否有效 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	e=L.data[i<span class="number">-1</span>];<span class="comment">//将第i个位置（被删除位置）的数据赋值给e </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;L.length;j++)<span class="comment">//将第i个位置后的元素前移 </span></span><br><span class="line">	    L.data[j<span class="number">-1</span>]=L.data[j];</span><br><span class="line">	    </span><br><span class="line">	L.length--;<span class="comment">//线性表长度减1 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispList</span><span class="params">(SeqList L)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L.MaxSize;i++)</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">&quot;第%d个元素=%d\n&quot;</span>,i+<span class="number">1</span>,L.data[i]);</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> e=<span class="number">-1</span>;</span><br><span class="line">	SeqList L;</span><br><span class="line">	InitList(L);</span><br><span class="line">    ListInsert(L,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">    ListInsert(L,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">    ListInsert(L,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">	ListInsert(L,<span class="number">4</span>,<span class="number">4</span>);</span><br><span class="line">    ListInsert(L,<span class="number">5</span>,<span class="number">5</span>);</span><br><span class="line">    ListInsert(L,<span class="number">6</span>,<span class="number">6</span>);</span><br><span class="line">    ListInsert(L,<span class="number">7</span>,<span class="number">7</span>);</span><br><span class="line">    ListInsert(L,<span class="number">8</span>,<span class="number">8</span>);</span><br><span class="line">    ListInsert(L,<span class="number">9</span>,<span class="number">9</span>);</span><br><span class="line">    ListInsert(L,<span class="number">10</span>,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">	<span class="keyword">if</span>(ListDelete(L,<span class="number">1</span>,e))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;已删除第1个元素，删除值为=%d\n&quot;</span>,e);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;位序i不合法，删除失败\n&quot;</span>);</span><br><span class="line">        </span><br><span class="line">    DispList(L);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
 
 <p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
 
-      
-    </div><!-- .entry-content -->
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/10/two/" data-id="ckg3a5ix600047scq9sx97q1c" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+                                    </footer>
 
-    <footer class="entry-meta">
-    <a href="/2020/10/10/two/">
-    <time datetime="2020-10-09T16:04:40.000Z" class="entry-date">
-        2020-10-10
-    </time>
-</a>
+    </div>
+
+    
+        
+  <nav class="article-nav">
+    
+      <a href="/2020/10/10/three/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer</strong>
+        <div class="article-nav-title">
+          
+            3线性表单链表带头结点
+          
+        </div>
+      </a>
     
     
-    </footer>
+      <a href="/2020/10/10/one/" class="article-nav-link">
+        <strong class="article-nav-caption">Older</strong>
+        <div class="article-nav-title">1_线性表顺序表静态数组</div>
+      </a>
+    
+  </nav>
+
+
+            
+
+                
+                    
+                        
+                            
+
 </article>
-
-
-    
-<nav class="nav-single">
-    <h3 class="assistive-text">文章导航</h3>
-    
-        <span class="nav-previous"><a href="/2020/10/10/three/" rel="prev"><span class="meta-nav">←</span> 3线性表单链表带头结点</a></span>
-    
-    
-        <span class="nav-next"><a href="/2020/10/10/one/" rel="next">1_线性表顺序表静态数组 <span class="meta-nav">→</span></a></span>
-    
-</nav><!-- .nav-single -->
-
-
-
-
-
-
-
-</div></div>
-        <div id="secondary" class="widget-area" role="complementary">
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
   
-    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
-    <div>
-        <input type="text" value="" name="s" id="s" />
-        <input type="submit" id="searchsubmit" value="搜索" />
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
     </div>
-</form></aside>
-  
-    
-  
-    
-  
-    
-  <aside class="widget">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget-content">
-      <ul>
-        
-          <li>
-            <a href="/2020/10/10/five/">5双链表带头结点</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/10/four/">4线性表单链表不带头结点</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/10/three/">3线性表单链表带头结点</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/10/two/">2_线性表顺序表动态数组</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/10/one/">1_线性表顺序表静态数组</a>
-          </li>
-        
-      </ul>
-    </div>
-  </aside>
-
-  
-    
-  
-    
-  
-</div>
-      </div>
-      <footer id="colophon" role="contentinfo">
-    <p>&copy; 2020 李博文
-    All rights reserved.</p>
-    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
-</footer>
-    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
-
-<script src="/js/jquery-3.3.1.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-<script src="/js/navigation.js"></script>
-
-<div id="bg"></div>
-
+    <ul class="list-inline">
+      <li>&copy; 2020 一个神奇的网站—lbw</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
   </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="一个神奇的网站—lbw"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
 </body>
 </html>
