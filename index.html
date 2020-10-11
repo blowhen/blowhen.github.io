@@ -62,6 +62,65 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-14" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/11/14/">14链队带头结点</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/11/14/" class="article-date">
+  <time datetime="2020-10-10T16:12:00.000Z" itemprop="datePublished">2020-10-11</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、入队、出队、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span>&#123;</span><span class="comment">//链式队列结点 </span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LinkNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span><span class="comment">//链式队列 </span></span><br><span class="line">	LinkNode *front,*rear;<span class="comment">//队列的队头和队尾指针 </span></span><br><span class="line">&#125;LinkQueue;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitQueue</span><span class="params">(LinkQueue &amp;Q)</span></span>&#123;<span class="comment">//初始化队列(带头结点)</span></span><br><span class="line">	</span><br><span class="line">	Q.front=Q.rear=(LinkNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LinkNode));<span class="comment">//声明队头队尾结点 </span></span><br><span class="line">	</span><br><span class="line">	Q.front-&gt;next=<span class="literal">NULL</span>;<span class="comment">//头结点的next指针指向空 </span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsEmpty</span><span class="params">(LinkQueue Q)</span></span>&#123;<span class="comment">//判空 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.front==Q.rear)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EnQueue</span><span class="params">(LinkQueue &amp;Q,ElemType x)</span></span>&#123;<span class="comment">//新元素入队 </span></span><br><span class="line">	LinkNode *s=(LinkNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LinkNode));<span class="comment">//声明s结点 </span></span><br><span class="line">	</span><br><span class="line">	s-&gt;data=x;<span class="comment">//将x赋给s的数据域 </span></span><br><span class="line">	s-&gt;next=<span class="literal">NULL</span>;<span class="comment">//s的next指针指向空 </span></span><br><span class="line">	Q.rear-&gt;next=s;<span class="comment">//新结点插入到rear之后 </span></span><br><span class="line">	Q.rear=s;<span class="comment">//修改表尾指针 </span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DeQueue</span><span class="params">(LinkQueue &amp;Q,ElemType &amp;x)</span></span>&#123;<span class="comment">//队头元素出队 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.front==Q.rear)<span class="comment">//空队报错 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	LinkNode *p=Q.front-&gt;next;<span class="comment">//声明指针p指向队头元素的下一个结点 </span></span><br><span class="line">	x=p-&gt;data;<span class="comment">//用变量x返回队头元素 </span></span><br><span class="line">	Q.front-&gt;next=p-&gt;next;<span class="comment">//头结点的next指针指向p的下一个指针 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(Q.rear==p)<span class="comment">//此次是最后一个结点出队 </span></span><br><span class="line">	    Q.rear=Q.front;<span class="comment">//修改rear指针 </span></span><br><span class="line">	    </span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispQueue</span><span class="params">(LinkQueue Q)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"> 	LinkNode *p=Q.front-&gt;next;<span class="comment">//定义一个结点指针p指向头结点的下一个结点</span></span><br><span class="line"> 	</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123; <span class="comment">//如果p不为空则循环</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;第%d个元素为%d\n&quot;</span>,i,p-&gt;data);</span><br><span class="line">		p=p-&gt;next;<span class="comment">//移动指针p遍历链表</span></span><br><span class="line">		i++;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkQueue Q;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>);</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>); </span><br><span class="line">	DispQueue(Q);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/11/14/" data-id="ckg5a98o80005ckcqgd6b5u3b" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
           <article id="post-13" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
@@ -107,7 +166,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/13/" data-id="ckg5a83un0004hwcq9exe3op6" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/13/" data-id="ckg5a98o60004ckcqftgjbbkf" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -166,7 +225,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/12/" data-id="ckg5a83um0003hwcq943r8zug" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/12/" data-id="ckg5a98o50003ckcq8tpmh8o1" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -225,7 +284,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/11/" data-id="ckg5a83uk0002hwcq7bnf5bke" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/11/" data-id="ckg5a98o30002ckcq8qjpb0ch" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -284,7 +343,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/10/" data-id="ckg5a83uh0001hwcqdpuwa4tw" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/10/" data-id="ckg5a98o10001ckcq978d01xs" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -343,7 +402,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/9/" data-id="ckg5a83uz000chwcq0nvtbqaq" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/9/" data-id="ckg5a98oh000dckcqea2bf0rm" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -402,7 +461,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/8/" data-id="ckg5a83uw000bhwcq76s3bp76" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/8/" data-id="ckg5a98og000cckcqfrk30q7a" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -461,7 +520,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/7/" data-id="ckg5a83uv000ahwcq0dp1agfw" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/7/" data-id="ckg5a98oe000bckcq6abe3z08" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -520,7 +579,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/6/" data-id="ckg5a83uu0009hwcq6nmm9of2" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/6/" data-id="ckg5a98od000ackcq5h371dw3" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -579,66 +638,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/5/" data-id="ckg5a83ut0008hwcqh66z7n6q" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-4" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/10/4/">4线性表单链表不带头结点</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/10/4/" class="article-date">
-  <time datetime="2020-10-09T16:06:59.000Z" itemprop="datePublished">2020-10-10</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、按位序插入</span></span><br><span class="line"><span class="comment">//不带头结点操作中，除了初始化，头插，尾插，删除操作与带头结点的单链表有差别外，其它的操作基本上一样。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名  </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span><span class="comment">//定义单链表结点类型 </span></span><br><span class="line">	ElemType data;<span class="comment">//每个结点存放一个数据元素 </span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span><span class="comment">//next指针，指向下一个节点 </span></span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line"><span class="comment">//此处应注意：强调一个单链表使用LinkList、强调一个结点使用LNode *</span></span><br><span class="line"><span class="comment">//注意此时申请结点指针代码：LNode *p=(LNode *)malloc(sizeof(LNode)); </span></span><br><span class="line"><span class="comment">//注意此时申请头结点指针代码：L=(LNode *)malloc(sizeof(LNode)); （L已声明） </span></span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">bool</span> <span class="title">InitList</span><span class="params">(LinkList &amp;L)</span></span>&#123;<span class="comment">//初始化一个空的单链表 </span></span><br><span class="line"> 	L=<span class="literal">NULL</span>;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> <span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">(LinkList L)</span></span>&#123;<span class="comment">//判断单链表是否为空 </span></span><br><span class="line"> 	<span class="keyword">if</span>(L==<span class="literal">NULL</span>)</span><br><span class="line"> 	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> 	<span class="keyword">else</span></span><br><span class="line"> 	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ListInsert</span><span class="params">(LinkList &amp;L,<span class="keyword">int</span> i,ElemType e)</span></span>&#123;<span class="comment">//按位序插入,在第i个位置插入e </span></span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>)<span class="comment">//i值不合法 </span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(i==<span class="number">1</span>)&#123;<span class="comment">//插入第i个结点的操作与其他结点不同 </span></span><br><span class="line">    	LNode *s=(LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));<span class="comment">//申请结点 </span></span><br><span class="line">    	s-&gt;data=e;<span class="comment">//将值置于s的数据域 </span></span><br><span class="line">    	s-&gt;next=L;<span class="comment">//s结点的next指针指向L </span></span><br><span class="line">    	L=s;<span class="comment">//头指针L指向s（新结点） </span></span><br><span class="line">    	<span class="keyword">return</span> <span class="literal">true</span>;	</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    LNode *p;<span class="comment">//声明指针p，用于指向当前扫描到的结点 </span></span><br><span class="line">    <span class="keyword">int</span> j=<span class="number">1</span>;<span class="comment">//当前p指向的是第几个结点</span></span><br><span class="line">    <span class="comment">//注意：此时j=1 </span></span><br><span class="line">    p=L;<span class="comment">//重点，要注意在不带头结点的情况下，p指向第1个结点，而不是（第0个结点=头结点） </span></span><br><span class="line">	<span class="comment">//LNode *p=L; 此时p指向单链表第1个结点，由于此时不带头结点，故第一个结点不是头结点</span></span><br><span class="line">	<span class="comment">//此时可以等价于带头结点的LNode *p=L-&gt;next; </span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(p!=<span class="literal">NULL</span> &amp;&amp; j&lt;i<span class="number">-1</span>)&#123;<span class="comment">//循环找到第i-1个结点 </span></span><br><span class="line">    	p=p-&gt;next;</span><br><span class="line">    	j++;</span><br><span class="line">    	</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//i值不合法 </span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    LNode *s=(LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">    s-&gt;data=e;</span><br><span class="line">    s-&gt;next=p-&gt;next;</span><br><span class="line">    p-&gt;next=s;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispList</span><span class="params">(LinkList L)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"> 	LNode *p=L;<span class="comment">//定义一个结点指针p指向第一个结点</span></span><br><span class="line"> 	</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123; <span class="comment">//如果p不为空则循环</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;第%d个元素为%d\n&quot;</span>,i,p-&gt;data);</span><br><span class="line">		p=p-&gt;next;<span class="comment">//移动指针p遍历链表</span></span><br><span class="line">		i++;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkList L;</span><br><span class="line">	ListInsert(L,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">	ListInsert(L,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">	DispList(L);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/4/" data-id="ckg5a83ur0007hwcq2bub2hum" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/5/" data-id="ckg5a98oc0009ckcq7y045doe" class="article-share-link">
                                             Share
                                         </a>
                                         
