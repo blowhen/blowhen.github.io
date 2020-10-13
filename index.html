@@ -62,6 +62,128 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-17" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/13/17/">17链串</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/13/17/" class="article-date">
+  <time datetime="2020-10-12T16:02:00.000Z" itemprop="datePublished">2020-10-13</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成串、求串长、求子串、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">StringNode</span>&#123;</span></span><br><span class="line">	<span class="keyword">char</span> data;<span class="comment">//此时char data[4];表示一个结点能够存4个字符；此次为了方便操作，结点大小设置为1 </span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">StringNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;StrNode, *String;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//注意：链串的组织形式与一般单链表相似，主要区别在于链串中的一个结点可以存储多个字符</span></span><br><span class="line"><span class="comment">//通常将链串中每个结点所存储的字符个数成为结点大小</span></span><br><span class="line"><span class="comment">//注意：在结点大小大于1的情况下，链串的尾结点各个数据域不一定能够总能全被字符占满，此时一般补上‘#’等不属于字符集的特殊符号</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StrAssign</span><span class="params">(String &amp;S,<span class="keyword">char</span> ch[])</span></span>&#123;<span class="comment">//生成串 </span></span><br><span class="line">	StrNode *p,*r;</span><br><span class="line">	S=(String)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StrNode));</span><br><span class="line">	r=S;<span class="comment">//r始终指向尾结点</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;ch[i]!=<span class="string">&#x27;\0&#x27;</span>;i++)&#123;</span><br><span class="line">		p=(StrNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StrNode));</span><br><span class="line">		p-&gt;data=ch[i];</span><br><span class="line">		r-&gt;next=p;</span><br><span class="line">		r=p;</span><br><span class="line">	&#125; </span><br><span class="line">	r-&gt;next=<span class="literal">NULL</span>;<span class="comment">//尾结点的next指向空 </span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StringLength</span><span class="params">(String S)</span></span>&#123;<span class="comment">//求串长 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	StrNode *p=S-&gt;next;</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		i++;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">StrNode *<span class="title">SubString</span><span class="params">(String &amp;Sub,String S,<span class="keyword">int</span> pos,<span class="keyword">int</span> len)</span></span>&#123;<span class="comment">//求子串，Sub为结果串</span></span><br><span class="line">	<span class="keyword">int</span> k;</span><br><span class="line">	StrNode *p=S-&gt;next,*q,*r;<span class="comment">//p指针指向s的下一个结点 </span></span><br><span class="line">	Sub=(String)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StrNode));</span><br><span class="line">	</span><br><span class="line">	Sub-&gt;next=<span class="literal">NULL</span>;<span class="comment">//置串Sub为空串 </span></span><br><span class="line">	r=Sub;<span class="comment">//r指向Sub的尾结点</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(pos&lt;=<span class="number">0</span> || pos&gt;StringLength(S) || len&lt;<span class="number">0</span> || pos+len<span class="number">-1</span>&gt;StringLength(S))</span><br><span class="line">	    <span class="keyword">return</span> Sub;<span class="comment">//参数不正确返回空串 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;pos;k++)<span class="comment">//让p指向链串S的第pos个数据结点 </span></span><br><span class="line">	    p=p-&gt;next;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=len;k++)&#123;<span class="comment">//将S的第pos个结点开始的len个结点复制到Sub </span></span><br><span class="line">		q=(StrNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StrNode));</span><br><span class="line">		q-&gt;data=p-&gt;data;</span><br><span class="line">		r-&gt;next=q;</span><br><span class="line">		r=q;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	r-&gt;next=<span class="literal">NULL</span>;<span class="comment">//尾结点的next指针指向空 </span></span><br><span class="line">	<span class="keyword">return</span> Sub;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispStr</span><span class="params">(String S)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	StrNode *p=S-&gt;next;</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;第%d个字符是%c\n&quot;</span>,i+<span class="number">1</span>,p-&gt;data);</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		i++;</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	String S,Sub;</span><br><span class="line">	<span class="keyword">char</span> ch1[<span class="number">10</span>]=<span class="string">&quot;dsadsa&quot;</span>;</span><br><span class="line">	StrAssign(S,ch1);</span><br><span class="line">	StringLength(S);</span><br><span class="line">	SubString(Sub,S,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">	DispStr(S);</span><br><span class="line">	DispStr(Sub);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/13/17/" data-id="ckg819mxn0008nwcqeo7cghhr" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%B2/" rel="tag">串</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-16" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/13/16/">16顺序串</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/13/16/" class="article-date">
+  <time datetime="2020-10-12T16:01:00.000Z" itemprop="datePublished">2020-10-13</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成串、求子串、比较、求串长、定位、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSzie 255<span class="comment">//预定义最大串长为255</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span><span class="comment">//静态数组实现（定长顺序存储） </span></span><br><span class="line">	<span class="keyword">char</span> data[MaxSzie];<span class="comment">//每个分量存储一个字符 </span></span><br><span class="line">	<span class="keyword">int</span> length;<span class="comment">//串的实际长度 </span></span><br><span class="line">&#125;SString;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//typedef struct&#123;//动态数组实现（堆分配存储） </span></span><br><span class="line"><span class="comment">//	char *ch;//按串长分配存储区，ch指向串的基地址 </span></span><br><span class="line"><span class="comment">//	int length;</span></span><br><span class="line"><span class="comment">//&#125;HString; </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//HString S; </span></span><br><span class="line"><span class="comment">//S.ch=(char *)malloc(MaxSize*sizeof(char));</span></span><br><span class="line"><span class="comment">//S.length=0; </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StrAssign</span><span class="params">(SString &amp;S,<span class="keyword">char</span> ch[])</span></span>&#123;<span class="comment">//生成串 </span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;ch[i]!=<span class="string">&#x27;\0&#x27;</span>;i++)<span class="comment">//串不为空则赋值 </span></span><br><span class="line">	    S.data[i]=ch[i];</span><br><span class="line">	</span><br><span class="line">	S.length=i;<span class="comment">//设置串的长度 </span></span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function">SString <span class="title">SubString</span><span class="params">(SString &amp;Sub,SString S,<span class="keyword">int</span> pos,<span class="keyword">int</span> len)</span></span>&#123;<span class="comment">//求子串（用Sub返回串S的第pos个字符起长度为len的子串）</span></span><br><span class="line">	<span class="keyword">int</span> k;</span><br><span class="line">	Sub.length=<span class="number">0</span>;<span class="comment">//设置Sub为空串 </span></span><br><span class="line">	<span class="keyword">if</span>(pos&lt;=<span class="number">0</span>||pos&gt;S.length||len&lt;<span class="number">0</span>||+len<span class="number">-1</span>&gt;S.length)<span class="comment">//位序=下标+1   下标=位序-1   （1&lt;=i&lt;=length） </span></span><br><span class="line">	    <span class="keyword">return</span> Sub;<span class="comment">//参数不正确返回空串 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(k=pos<span class="number">-1</span>;k&lt;pos+len<span class="number">-1</span>;k++)<span class="comment">//将S.data[pos...pos+len-1]复制到Sub </span></span><br><span class="line">	    Sub.data[k-pos+<span class="number">1</span>]=S.data[k];</span><br><span class="line">	</span><br><span class="line">	Sub.length=len;</span><br><span class="line">	<span class="keyword">return</span> Sub;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StrCompare</span><span class="params">(SString S,SString T)</span></span>&#123;<span class="comment">//比较操作。若S&gt;T,返回值&gt;0;S=T,返回值=0；若S&lt;T，返回值&lt;0 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;S.length &amp;&amp; i&lt;T.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(S.data[i]!=T.data[i])</span><br><span class="line">		    <span class="keyword">return</span> S.data[i]-T.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> S.length-T.length;<span class="comment">//扫描过的所有字符都相同，则长度长的串更大 </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StrLength</span><span class="params">(SString S)</span></span>&#123;<span class="comment">//求串长 </span></span><br><span class="line">	<span class="keyword">return</span> S.length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Index</span><span class="params">(SString S,SString T)</span></span>&#123;<span class="comment">//定位操作，若主串S中存中与串T相同的子串，则返回他在主串S第一次出现的位置，否则返回0 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>,n=StrLength(S),m=StrLength(T);</span><br><span class="line">	SString Sub;<span class="comment">//用于暂存子串</span></span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">while</span>(i&lt;=n-m+<span class="number">1</span>)&#123;</span><br><span class="line">		SubString(Sub,S,i,m);</span><br><span class="line">		<span class="keyword">if</span>(StrCompare(Sub,T)!=<span class="number">0</span>)</span><br><span class="line">		    ++i;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		    <span class="keyword">return</span> i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispStr</span><span class="params">(SString S)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;S.length;i++)</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">&quot;第%d个元素=%c\n&quot;</span>,i+<span class="number">1</span>,S.data[i]);</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	SString Sub,S;</span><br><span class="line">	<span class="keyword">char</span> ch[<span class="number">10</span>]=<span class="string">&quot;fsdgsd&quot;</span>;</span><br><span class="line">	StrAssign(S,ch);</span><br><span class="line">	SubString(Sub,S,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">	DispStr(S);</span><br><span class="line">	DispStr(Sub);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/13/16/" data-id="ckg819mxp0009nwcq8qkpebdg" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%B2/" rel="tag">串</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
           <article id="post-15" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
@@ -107,10 +229,12 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/12/15/" data-id="ckg6ozezp0006vccqe64z30tg" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/12/15/" data-id="ckg819mxj0006nwcqagqnemcn" class="article-share-link">
                                             Share
                                         </a>
                                         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
+
                                     </footer>
 
     </div>
@@ -166,10 +290,12 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/14/" data-id="ckg6ozezo0005vccq0yancgkx" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/14/" data-id="ckg819mxi0005nwcq3mji2dkd" class="article-share-link">
                                             Share
                                         </a>
                                         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
+
                                     </footer>
 
     </div>
@@ -225,7 +351,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/13/" data-id="ckg6ozezm0003vccqe5a777ht" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/13/" data-id="ckg819mxh0004nwcqfvqy7y4u" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -284,7 +410,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/12/" data-id="ckg6ozezn0004vccqaugz7e7d" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/12/" data-id="ckg819mxg0003nwcq23jy9pqe" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -343,7 +469,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/11/" data-id="ckg6ozezl0002vccqbz2t960s" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/11/" data-id="ckg819mxd0001nwcqehsk2fgp" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -402,7 +528,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/10/" data-id="ckg6ozezj0001vccq8jvxdt7q" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/10/" data-id="ckg819mxf0002nwcq37zce5j9" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -461,7 +587,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/9/" data-id="ckg6ozezx000evccqezvxeltf" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/9/" data-id="ckg819mxy000nnwcqhjprh4h0" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -520,125 +646,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/8/" data-id="ckg6ozezw000dvccqbje08fo3" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-7" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/10/7/">7循环双链表</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/10/7/" class="article-date">
-  <time datetime="2020-10-09T16:09:40.000Z" itemprop="datePublished">2020-10-10</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、判断节点p是否为循环链表的表尾结点</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DNode</span>&#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">DNode</span> *<span class="title">prior</span>,*<span class="title">next</span>;</span></span><br><span class="line">&#125;DNode,*DLinkList;<span class="comment">//双链表定义</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">InitDLinkList</span><span class="params">(DLinkList &amp;L)</span></span>&#123;<span class="comment">//初始化 </span></span><br><span class="line">	L=(DNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DNode));</span><br><span class="line">	<span class="keyword">if</span>(L==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    L-&gt;prior=L;</span><br><span class="line">    L-&gt;next=L;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">(DLinkList L)</span></span>&#123;<span class="comment">//判空 </span></span><br><span class="line">	<span class="keyword">if</span>(L-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isTail</span><span class="params">(DLinkList L,DNode *p)</span></span>&#123;<span class="comment">//判断节点p是否为循环链表的表尾结点 </span></span><br><span class="line">	<span class="keyword">if</span>(p-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	DLinkList L;</span><br><span class="line">	InitDLinkList(L); </span><br><span class="line">	DNode *p=(DNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DNode));</span><br><span class="line">	isTail(L,p);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/7/" data-id="ckg6ozezv000cvccqcffm80jj" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-6" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/10/6/">6循环单链表</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/10/6/" class="article-date">
-  <time datetime="2020-10-09T16:08:49.000Z" itemprop="datePublished">2020-10-10</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、判断结点p是否为循环单链表的表尾结点 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LNode,*LinkList;<span class="comment">//单链表定义 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">InitList</span><span class="params">(LinkList &amp;L)</span></span>&#123;<span class="comment">//初始化一个循环单链表 </span></span><br><span class="line">	L=(LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));<span class="comment">//分配一个头结点 </span></span><br><span class="line">	<span class="keyword">if</span>(L==<span class="literal">NULL</span>)<span class="comment">//内存不足，分配失败 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	L-&gt;next=L;<span class="comment">//头结点next指向头结点 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isTail</span><span class="params">(LinkList L,LNode *p)</span></span>&#123;<span class="comment">//判断结点p是否为循环单链表的表尾结点 </span></span><br><span class="line">	<span class="keyword">if</span>(p-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">(LinkList L)</span></span>&#123;<span class="comment">//判断循环单链表是否为空 </span></span><br><span class="line">	<span class="keyword">if</span>(L-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	    </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkList L;</span><br><span class="line">	InitList(L);</span><br><span class="line">	<span class="comment">//... </span></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/6/" data-id="ckg6ozezt000bvccq9bedgfgl" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/8/" data-id="ckg819mxx000mnwcq6rhqb1dq" class="article-share-link">
                                             Share
                                         </a>
                                         

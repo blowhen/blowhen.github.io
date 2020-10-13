@@ -62,6 +62,124 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-7" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/10/7/">7循环双链表</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/10/7/" class="article-date">
+  <time datetime="2020-10-09T16:09:40.000Z" itemprop="datePublished">2020-10-10</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、判断节点p是否为循环链表的表尾结点</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DNode</span>&#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">DNode</span> *<span class="title">prior</span>,*<span class="title">next</span>;</span></span><br><span class="line">&#125;DNode,*DLinkList;<span class="comment">//双链表定义</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">InitDLinkList</span><span class="params">(DLinkList &amp;L)</span></span>&#123;<span class="comment">//初始化 </span></span><br><span class="line">	L=(DNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DNode));</span><br><span class="line">	<span class="keyword">if</span>(L==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    L-&gt;prior=L;</span><br><span class="line">    L-&gt;next=L;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">(DLinkList L)</span></span>&#123;<span class="comment">//判空 </span></span><br><span class="line">	<span class="keyword">if</span>(L-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isTail</span><span class="params">(DLinkList L,DNode *p)</span></span>&#123;<span class="comment">//判断节点p是否为循环链表的表尾结点 </span></span><br><span class="line">	<span class="keyword">if</span>(p-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	DLinkList L;</span><br><span class="line">	InitDLinkList(L); </span><br><span class="line">	DNode *p=(DNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DNode));</span><br><span class="line">	isTail(L,p);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/10/7/" data-id="ckg819mxw000knwcq25mxatpn" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-6" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/10/6/">6循环单链表</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/10/6/" class="article-date">
+  <time datetime="2020-10-09T16:08:49.000Z" itemprop="datePublished">2020-10-10</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、判断结点p是否为循环单链表的表尾结点 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LNode,*LinkList;<span class="comment">//单链表定义 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">InitList</span><span class="params">(LinkList &amp;L)</span></span>&#123;<span class="comment">//初始化一个循环单链表 </span></span><br><span class="line">	L=(LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));<span class="comment">//分配一个头结点 </span></span><br><span class="line">	<span class="keyword">if</span>(L==<span class="literal">NULL</span>)<span class="comment">//内存不足，分配失败 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	L-&gt;next=L;<span class="comment">//头结点next指向头结点 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isTail</span><span class="params">(LinkList L,LNode *p)</span></span>&#123;<span class="comment">//判断结点p是否为循环单链表的表尾结点 </span></span><br><span class="line">	<span class="keyword">if</span>(p-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">(LinkList L)</span></span>&#123;<span class="comment">//判断循环单链表是否为空 </span></span><br><span class="line">	<span class="keyword">if</span>(L-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	    </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkList L;</span><br><span class="line">	InitList(L);</span><br><span class="line">	<span class="comment">//... </span></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/10/6/" data-id="ckg819mxv000inwcq9y3pbhsp" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
           <article id="post-5" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
@@ -107,7 +225,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/5/" data-id="ckg6ozezr0009vccqbv3109b2" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/5/" data-id="ckg819mxu000hnwcqbbd61pz5" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -166,7 +284,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/4/" data-id="ckg6ozezs000avccqapt5adlh" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/4/" data-id="ckg819mxt000enwcqgv519dku" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -225,7 +343,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/3/" data-id="ckg6ozezq0008vccq5wzh5baz" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/3/" data-id="ckg819mxs000dnwcq2tma3qns" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -284,7 +402,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/2/" data-id="ckg6ozezp0007vccqgj4849z3" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/2/" data-id="ckg819mxq000anwcq3a2bd4f5" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -343,7 +461,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/1/" data-id="ckg6ozeze0000vccqczl5etgt" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/1/" data-id="ckg819mx80000nwcqe97ph557" class="article-share-link">
                                             Share
                                         </a>
                                         
