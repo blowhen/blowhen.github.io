@@ -62,6 +62,494 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-h" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/h/">h归并排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/h/" class="article-date">
+  <time datetime="2020-10-15T16:08:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=0 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> low,<span class="keyword">int</span> mid,<span class="keyword">int</span> high)</span></span>&#123;<span class="comment">//归并排序，第一个函数 </span></span><br><span class="line">	<span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="comment">//int *b=(int *)malloc((high+1)*sizeof(int));</span></span><br><span class="line">	<span class="keyword">int</span> *b=<span class="keyword">new</span> <span class="keyword">int</span>[high-low+<span class="number">1</span>];<span class="comment">//辅助数组b </span></span><br><span class="line">	<span class="keyword">for</span>(k=low;k&lt;=high;k++)</span><br><span class="line">	    b[k]=a[k];<span class="comment">//将a中所有元素复制到b中 </span></span><br><span class="line">	    </span><br><span class="line">	<span class="keyword">for</span>(i=low,j=mid+<span class="number">1</span>,k=i; i&lt;=mid &amp;&amp; j&lt;=high;k++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b[i]&lt;=b[j])</span><br><span class="line">		  a[k]=b[i++];<span class="comment">//将较小值复制到a中 </span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		  a[k]=b[j++];</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(i&lt;=mid)</span><br><span class="line">	  a[k++]=b[i++];</span><br><span class="line">	  </span><br><span class="line">	<span class="keyword">while</span>(j&lt;=high)</span><br><span class="line">	  a[k++]=b[j++];</span><br><span class="line">  </span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;<span class="comment">//归并排序，第二个函数 </span></span><br><span class="line">	<span class="keyword">if</span>(low&lt;high)&#123;</span><br><span class="line">		<span class="keyword">int</span> mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">		</span><br><span class="line">		MergeSort(a,low,mid);</span><br><span class="line">		MergeSort(a,mid+<span class="number">1</span>,high);</span><br><span class="line">		</span><br><span class="line">		Merge(a,low,mid,high);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)<span class="comment">//注意此时k=0 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	MergeSort(arr,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/h/" data-id="ckgcc51bu001gi8cq8zhj1izt" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-g" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/g/">g堆排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/g/" class="article-date">
+  <time datetime="2020-10-15T16:07:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=1（堆排序，希尔排序，折半插入排序）  </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeadAdJust</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> k,<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//堆排序,第一个函数 </span></span><br><span class="line">	a[<span class="number">0</span>]=a[k];<span class="comment">//a[0]暂存子树的根结点 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>*k;i&lt;=n;i*=<span class="number">2</span>)&#123;<span class="comment">//沿key较大的子结点向下筛选 </span></span><br><span class="line">		<span class="keyword">if</span>(i&lt;n &amp;&amp; a[i]&lt;a[i+<span class="number">1</span>])<span class="comment">//取key较大的子结点的下标 </span></span><br><span class="line">			i++;</span><br><span class="line">			</span><br><span class="line">		<span class="keyword">if</span>(a[<span class="number">0</span>]&gt;=a[i])<span class="comment">//筛选结束 </span></span><br><span class="line">		    <span class="keyword">break</span>;   </span><br><span class="line">		<span class="keyword">else</span>&#123; </span><br><span class="line">			a[k]=a[i];<span class="comment">//将a[i]调整到双亲结点上 </span></span><br><span class="line">			k=i;<span class="comment">//修改k值，以便继续向下筛选 </span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	a[k]=a[<span class="number">0</span>];<span class="comment">//被筛选结点的值放入最终位置 </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildMaxHeap</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//堆排序，第二个函数 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n/<span class="number">2</span>;i&gt;<span class="number">0</span>;i--)<span class="comment">//从后往前调整所有非终端结点 </span></span><br><span class="line">		HeadAdJust(a,i,n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//堆排序，第三个函数 </span></span><br><span class="line">	BuildMaxHeap(a,n);<span class="comment">//初始建堆</span></span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;<span class="number">1</span>;i--)&#123;<span class="comment">//n-1趟交换和建堆过程 </span></span><br><span class="line">		<span class="keyword">int</span> temp=a[i];</span><br><span class="line">	    a[i]=a[<span class="number">1</span>];</span><br><span class="line">	    a[<span class="number">1</span>]=temp;</span><br><span class="line">	    </span><br><span class="line">		HeadAdJust(a,<span class="number">1</span>,i<span class="number">-1</span>);<span class="comment">//将剩余的待排序元素整理成堆 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=n;k++)<span class="comment">//注意此时k=1 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	HeapSort(arr,n);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/g/" data-id="ckgcc51bt001ei8cq832tge7o" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-f" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/f/">f简单选择排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/f/" class="article-date">
+  <time datetime="2020-10-15T16:06:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=0 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SelectSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//简单选择排序 </span></span><br><span class="line">          </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)&#123;<span class="comment">//一共进行n-1趟 </span></span><br><span class="line">		<span class="keyword">int</span> min=i;<span class="comment">//记录最小元素位置 </span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;n;j++)&#123;<span class="comment">//在a[i......n-1]中选择最小的元素 </span></span><br><span class="line">			<span class="keyword">if</span>(a[j]&lt;a[min])<span class="comment">//更新最小元素位置 </span></span><br><span class="line">				min=j;</span><br><span class="line">				</span><br><span class="line">			<span class="keyword">if</span>(min!=i)&#123;<span class="comment">//如果最小元素不等于i则交换 </span></span><br><span class="line">				<span class="keyword">int</span> temp=a[i];</span><br><span class="line">				a[i]=a[min];</span><br><span class="line">				a[min]=temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)<span class="comment">//注意此时k=0 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	SelectSort(arr,n);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/f/" data-id="ckgcc51bs001ci8cq57q1b0rh" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-e" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/e/">e快速排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/e/" class="article-date">
+  <time datetime="2020-10-15T16:05:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=0 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;<span class="comment">//快速排序，第一个函数 </span></span><br><span class="line"><span class="comment">//	if(a == NULL || low &lt; 0 || low &gt; high)</span></span><br><span class="line"><span class="comment">//	 return -1;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> p=a[low];</span><br><span class="line">	<span class="keyword">while</span>(low&lt;high)&#123;</span><br><span class="line">		<span class="keyword">while</span>(low&lt;high &amp;&amp; a[high]&gt;=p)</span><br><span class="line">			--high;</span><br><span class="line">			</span><br><span class="line">		a[low]=a[high];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(low&lt;high &amp;&amp; a[low] &lt;=p)</span><br><span class="line">		    ++low;</span><br><span class="line">		    </span><br><span class="line">		a[high]=a[low];</span><br><span class="line">	&#125;</span><br><span class="line">	a[low]=p;</span><br><span class="line">	<span class="keyword">return</span> low;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;<span class="comment">//快速排序，第二个函数 </span></span><br><span class="line">	<span class="keyword">if</span>(low&lt;high)&#123;</span><br><span class="line">		<span class="keyword">int</span> pos=Partition(a,low,high);</span><br><span class="line">		QuickSort(a,low,pos<span class="number">-1</span>);</span><br><span class="line">		QuickSort(a,pos+<span class="number">1</span>,high);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)<span class="comment">//注意此时k=0 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	QuickSort(arr,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/e/" data-id="ckgcc51br001ai8cq5koyfqy2" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-d" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/d/">d冒泡排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/d/" class="article-date">
+  <time datetime="2020-10-15T16:04:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=0 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//冒泡排序</span></span><br><span class="line">	<span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">bool</span> flag=<span class="literal">false</span>;<span class="comment">//表示本趟冒泡是否发生交换的标志 </span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=n<span class="number">-1</span>;j&gt;i;j--)<span class="comment">//一趟冒泡过程 </span></span><br><span class="line">            <span class="keyword">if</span>(a[j<span class="number">-1</span>]&gt;a[j])<span class="comment">//若为逆序 </span></span><br><span class="line">            &#123;</span><br><span class="line">                temp=a[j<span class="number">-1</span>];</span><br><span class="line">                a[j<span class="number">-1</span>]=a[j];</span><br><span class="line">                a[j]=temp;</span><br><span class="line">                flag=<span class="literal">true</span>;</span><br><span class="line">            &#125;<span class="comment">//交换 </span></span><br><span class="line">        <span class="keyword">if</span>(flag==<span class="literal">false</span>)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)<span class="comment">//注意此时k=0 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	BubbleSort(arr,n);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/d/" data-id="ckgcc51bq0017i8cqeo1a5qfk" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-c" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/c/">c希尔排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/c/" class="article-date">
+  <time datetime="2020-10-15T16:03:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=1（堆排序，希尔排序，折半插入排序） </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//希尔排序</span></span><br><span class="line">    <span class="keyword">int</span> d,i,j;   </span><br><span class="line">	<span class="keyword">for</span>(d=n/<span class="number">2</span>;d&gt;=<span class="number">1</span>;d=d/<span class="number">2</span>)&#123;<span class="comment">//步长变化 </span></span><br><span class="line">		<span class="keyword">for</span>(i=d+<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i]&lt;a[i-d])&#123;<span class="comment">//需将a[i]插入有序增量序列 </span></span><br><span class="line">				a[<span class="number">0</span>]=a[i];<span class="comment">//暂存在a[0] </span></span><br><span class="line">				<span class="keyword">for</span>(j=i-d;j&gt;<span class="number">0</span> &amp;&amp; a[<span class="number">0</span>]&lt;a[j];j-=d)</span><br><span class="line">					a[j+d]=a[j];<span class="comment">//记录后移，查找插入位置</span></span><br><span class="line">					 </span><br><span class="line">				a[j+d]=a[<span class="number">0</span>];<span class="comment">//插入 </span></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=n;k++)<span class="comment">//注意此时k=1 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	ShellSort(arr,n);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/c/" data-id="ckgcc51bp0015i8cqg4tvdcb3" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-b" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/b/">b折半插入排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/b/" class="article-date">
+  <time datetime="2020-10-15T16:02:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=1（堆排序，希尔排序，折半插入排序） </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HalfInsertSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//折半插入排序（适用于有序的顺序表） </span></span><br><span class="line">	<span class="keyword">int</span> i,j,low,high,mid;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)&#123;<span class="comment">//将a[2]-a[n]插入前面的已排序序列 </span></span><br><span class="line">		a[<span class="number">0</span>]=a[i];<span class="comment">//将a[i]暂存到a[0] </span></span><br><span class="line">		low=<span class="number">1</span>;</span><br><span class="line">		high=i<span class="number">-1</span>;<span class="comment">//设置折半查找范围</span></span><br><span class="line">		 </span><br><span class="line">		<span class="keyword">while</span>(low&lt;=high)&#123;<span class="comment">//折半查找（默认递增有序） </span></span><br><span class="line">			mid=(low+high)/<span class="number">2</span>;<span class="comment">//取中间点</span></span><br><span class="line">			 </span><br><span class="line">			<span class="keyword">if</span>(a[mid]&gt;a[<span class="number">0</span>])<span class="comment">//查找左半子表 </span></span><br><span class="line">			    high=mid<span class="number">-1</span>;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">else</span><span class="comment">//查找右半子表 </span></span><br><span class="line">			    low=mid+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(j=i<span class="number">-1</span>;j&gt;=high+<span class="number">1</span>;--j)</span><br><span class="line">		    a[j+<span class="number">1</span>]=a[j];<span class="comment">//统一后移元素，空出插入位置 </span></span><br><span class="line">		</span><br><span class="line">		a[high+<span class="number">1</span>]=a[<span class="number">0</span>];	<span class="comment">//插入操作 </span></span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=n;k++)<span class="comment">//注意此时k=1 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	HalfInsertSort(arr,n);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/b/" data-id="ckgcc51bn0013i8cq9jpd1xyq" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-a" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/16/a/">a直接插入排序</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/16/a/" class="article-date">
+  <time datetime="2020-10-15T16:01:00.000Z" itemprop="datePublished">2020-10-16</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//输出k=0 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> low,<span class="keyword">int</span> mid,<span class="keyword">int</span> high)</span></span>&#123;<span class="comment">//归并排序，第一个函数 </span></span><br><span class="line">	<span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="comment">//int *b=(int *)malloc((high+1)*sizeof(int));</span></span><br><span class="line">	<span class="keyword">int</span> *b=<span class="keyword">new</span> <span class="keyword">int</span>[high-low+<span class="number">1</span>];<span class="comment">//辅助数组b </span></span><br><span class="line">	<span class="keyword">for</span>(k=low;k&lt;=high;k++)</span><br><span class="line">	    b[k]=a[k];<span class="comment">//将a中所有元素复制到b中 </span></span><br><span class="line">	    </span><br><span class="line">	<span class="keyword">for</span>(i=low,j=mid+<span class="number">1</span>,k=i; i&lt;=mid &amp;&amp; j&lt;=high;k++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b[i]&lt;=b[j])</span><br><span class="line">		  a[k]=b[i++];<span class="comment">//将较小值复制到a中 </span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		  a[k]=b[j++];</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(i&lt;=mid)</span><br><span class="line">	  a[k++]=b[i++];</span><br><span class="line">	  </span><br><span class="line">	<span class="keyword">while</span>(j&lt;=high)</span><br><span class="line">	  a[k++]=b[j++];</span><br><span class="line">  </span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;<span class="comment">//归并排序，第二个函数 </span></span><br><span class="line">	<span class="keyword">if</span>(low&lt;high)&#123;</span><br><span class="line">		<span class="keyword">int</span> mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">		</span><br><span class="line">		MergeSort(a,low,mid);</span><br><span class="line">		MergeSort(a,mid+<span class="number">1</span>,high);</span><br><span class="line">		</span><br><span class="line">		Merge(a,low,mid,high);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//第一步 </span></span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> k,n=<span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第二步 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input the array:\n &quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)<span class="comment">//注意此时k=0 </span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[k]);</span><br><span class="line">    </span><br><span class="line">	<span class="comment">//第三步 </span></span><br><span class="line">	MergeSort(arr,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第四步 </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the result of sort is: \n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,arr[k]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/16/a/" data-id="ckgcc51bl000yi8cqc3tb52ai" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
           <article id="post-17" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
@@ -107,7 +595,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/13/17/" data-id="ckg81edr9000ecocqg7ckejte" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/13/17/" data-id="ckgcc51bb000ei8cq4yl42mnn" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -168,499 +656,11 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/13/16/" data-id="ckg81edr8000ccocq6d0x9wwl" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/13/16/" data-id="ckgcc51b80009i8cq72p4emnk" class="article-share-link">
                                             Share
                                         </a>
                                         
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%B2/" rel="tag">串</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-15" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/12/15/">15链队不带头结点</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/12/15/" class="article-date">
-  <time datetime="2020-10-11T16:01:00.000Z" itemprop="datePublished">2020-10-12</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空队列是否为空、入队、队头元素出队、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span>&#123;</span><span class="comment">//链式队列结点 </span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LinkNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span><span class="comment">//链式队列 </span></span><br><span class="line">	LinkNode *front,*rear;<span class="comment">//队列的队头和队尾指针 </span></span><br><span class="line">&#125;LinkQueue;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitQueue</span><span class="params">(LinkQueue &amp;Q)</span></span>&#123;<span class="comment">//初始化(不带头结点)</span></span><br><span class="line">	Q.front=<span class="literal">NULL</span>;</span><br><span class="line">	Q.rear=<span class="literal">NULL</span>;<span class="comment">//初始化front、rear都指向NULL </span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsEmpty</span><span class="params">(LinkQueue Q)</span></span>&#123;<span class="comment">//判空队列是否为空（不带头结点） </span></span><br><span class="line">	<span class="keyword">if</span>(Q.front==<span class="literal">NULL</span>)<span class="comment">//front指向NULL </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EnQueue</span><span class="params">(LinkQueue &amp;Q,ElemType x)</span></span>&#123;<span class="comment">//入队（不带头结点） </span></span><br><span class="line">	LinkNode *s=(LinkNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LinkNode));<span class="comment">//声明s结点 </span></span><br><span class="line">	</span><br><span class="line">	s-&gt;data=x;<span class="comment">//将x值赋给s的数据域 </span></span><br><span class="line">	s-&gt;next=<span class="literal">NULL</span>;<span class="comment">//s的next指针指向空 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(Q.front == <span class="literal">NULL</span>)&#123;<span class="comment">//在空队列中插入第一个元素是 </span></span><br><span class="line">		Q.front=s;<span class="comment">//修改队头队尾指针 </span></span><br><span class="line">		Q.rear=s;<span class="comment">//注意：不带头的队列，第一个元素入队需要特别处理 </span></span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		Q.rear-&gt;next=s;<span class="comment">//新结点插入到rear结点之后 </span></span><br><span class="line">		Q.rear=s;<span class="comment">//修改rear指针 </span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DeQueue</span><span class="params">(LinkQueue &amp;Q,ElemType &amp;x)</span></span>&#123;<span class="comment">//队头元素出队（不带头结点） </span></span><br><span class="line">	<span class="keyword">if</span>(Q.front==<span class="literal">NULL</span>)<span class="comment">//空队 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	LinkNode *p=Q.front;<span class="comment">//p指向此次出队的结点 </span></span><br><span class="line">	x=p-&gt;data;<span class="comment">//将p的数据域赋值给x </span></span><br><span class="line">	Q.front=p-&gt;next;<span class="comment">//修改front指针 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(Q.rear==p)&#123;<span class="comment">//如果队尾结点指向p（此次是最后一个结点出队） </span></span><br><span class="line">		Q.front=<span class="literal">NULL</span>;<span class="comment">//front和rear指针指向NULL </span></span><br><span class="line">		Q.rear=<span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispQueue</span><span class="params">(LinkQueue Q)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"> 	LinkNode *p=Q.front;<span class="comment">//定义一个结点指针p指向队头 </span></span><br><span class="line"> 	</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123; <span class="comment">//如果p不为空则循环</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;第%d个元素为%d\n&quot;</span>,i,p-&gt;data);</span><br><span class="line">		p=p-&gt;next;<span class="comment">//移动指针p遍历链表</span></span><br><span class="line">		i++;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkQueue Q;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line">	</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>);</span><br><span class="line">	IsEmpty(Q);</span><br><span class="line">	DispQueue(Q);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/12/15/" data-id="ckg81edr60009cocq2qvcg5q3" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-14" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/11/14/">14链队带头结点</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/11/14/" class="article-date">
-  <time datetime="2020-10-10T16:12:00.000Z" itemprop="datePublished">2020-10-11</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、入队、出队、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span>&#123;</span><span class="comment">//链式队列结点 </span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LinkNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span><span class="comment">//链式队列 </span></span><br><span class="line">	LinkNode *front,*rear;<span class="comment">//队列的队头和队尾指针 </span></span><br><span class="line">&#125;LinkQueue;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitQueue</span><span class="params">(LinkQueue &amp;Q)</span></span>&#123;<span class="comment">//初始化队列(带头结点)</span></span><br><span class="line">	</span><br><span class="line">	Q.front=Q.rear=(LinkNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LinkNode));<span class="comment">//声明队头队尾结点 </span></span><br><span class="line">	</span><br><span class="line">	Q.front-&gt;next=<span class="literal">NULL</span>;<span class="comment">//头结点的next指针指向空 </span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsEmpty</span><span class="params">(LinkQueue Q)</span></span>&#123;<span class="comment">//判空 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.front==Q.rear)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EnQueue</span><span class="params">(LinkQueue &amp;Q,ElemType x)</span></span>&#123;<span class="comment">//新元素入队 </span></span><br><span class="line">	LinkNode *s=(LinkNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LinkNode));<span class="comment">//声明s结点 </span></span><br><span class="line">	</span><br><span class="line">	s-&gt;data=x;<span class="comment">//将x赋给s的数据域 </span></span><br><span class="line">	s-&gt;next=<span class="literal">NULL</span>;<span class="comment">//s的next指针指向空 </span></span><br><span class="line">	Q.rear-&gt;next=s;<span class="comment">//新结点插入到rear之后 </span></span><br><span class="line">	Q.rear=s;<span class="comment">//修改表尾指针 </span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DeQueue</span><span class="params">(LinkQueue &amp;Q,ElemType &amp;x)</span></span>&#123;<span class="comment">//队头元素出队 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.front==Q.rear)<span class="comment">//空队报错 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	LinkNode *p=Q.front-&gt;next;<span class="comment">//声明指针p指向队头元素的下一个结点 </span></span><br><span class="line">	x=p-&gt;data;<span class="comment">//用变量x返回队头元素 </span></span><br><span class="line">	Q.front-&gt;next=p-&gt;next;<span class="comment">//头结点的next指针指向p的下一个指针 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(Q.rear==p)<span class="comment">//此次是最后一个结点出队 </span></span><br><span class="line">	    Q.rear=Q.front;<span class="comment">//修改rear指针 </span></span><br><span class="line">	    </span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispQueue</span><span class="params">(LinkQueue Q)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"> 	LinkNode *p=Q.front-&gt;next;<span class="comment">//定义一个结点指针p指向头结点的下一个结点</span></span><br><span class="line"> 	</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123; <span class="comment">//如果p不为空则循环</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;第%d个元素为%d\n&quot;</span>,i,p-&gt;data);</span><br><span class="line">		p=p-&gt;next;<span class="comment">//移动指针p遍历链表</span></span><br><span class="line">		i++;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkQueue Q;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>);</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>); </span><br><span class="line">	DispQueue(Q);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/14/" data-id="ckg81edr30005cocq7t6g1j4u" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-13" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/11/13/">13循环队列</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/11/13/" class="article-date">
-  <time datetime="2020-10-10T16:11:00.000Z" itemprop="datePublished">2020-10-11</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、入队、出队（删除一个队头元素）、取队头元素、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType data[MaxSize];<span class="comment">//用静态数组存放队列元素 </span></span><br><span class="line">	<span class="keyword">int</span> front,rear;<span class="comment">//队头和队尾指针 </span></span><br><span class="line">&#125;SqQueue; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitQueue</span><span class="params">(SqQueue &amp;Q)</span></span>&#123;<span class="comment">//初始化 </span></span><br><span class="line">	Q.rear=Q.front=<span class="number">0</span>;<span class="comment">//初始时，队头、队尾指针指向0 </span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">QueueEmpty</span><span class="params">(SqQueue Q)</span></span>&#123;<span class="comment">//判空 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.rear==Q.front)<span class="comment">//队空条件 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">EnQueue</span><span class="params">(SqQueue &amp;Q,ElemType x)</span></span>&#123;<span class="comment">//入队     注意：此时rear指向队尾元素的下一个位置</span></span><br><span class="line">	<span class="keyword">if</span>((Q.rear+<span class="number">1</span>)%MaxSize==Q.front)<span class="comment">//队满报错 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	    </span><br><span class="line">	Q.data[Q.rear]=x;<span class="comment">//新元素插入队尾 </span></span><br><span class="line">	Q.rear=(Q.rear+<span class="number">1</span>)%MaxSize;<span class="comment">//队尾指针加1取模，用模运算将存储空间在逻辑上变成了环状 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DeQueue</span><span class="params">(SqQueue &amp;Q,ElemType &amp;x)</span></span>&#123;<span class="comment">//出队（删除一个队头元素）  注意：此时rear指向队尾元素的下一个位置 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.rear==Q.front)<span class="comment">//队空报错 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	    </span><br><span class="line">	x=Q.data[Q.front];<span class="comment">//将队头元素赋给x </span></span><br><span class="line">	Q.front=(Q.front+<span class="number">1</span>)%MaxSize;<span class="comment">//队头指针后移（取模运算） </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">GetHead</span><span class="params">(SqQueue Q,ElemType &amp;x)</span></span>&#123;<span class="comment">//取队头元素 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.rear==Q.front)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	x=Q.data[Q.front];</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispSq</span><span class="params">(SqQueue Q)</span></span>&#123;<span class="comment">//输出</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;MaxSize;i++)</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">&quot;第%d个元素=%d\n&quot;</span>,i+<span class="number">1</span>,Q.data[i]);</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	SqQueue Q;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line">	QueueEmpty(Q);</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>);</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>);</span><br><span class="line">	EnQueue(Q,<span class="number">1</span>);</span><br><span class="line">	DispSq(Q);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/13/" data-id="ckg81edr50008cocqhmbfcvlz" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-12" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/11/12/">12顺序队列</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/11/12/" class="article-date">
-  <time datetime="2020-10-10T16:10:00.000Z" itemprop="datePublished">2020-10-11</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType data[MaxSize];<span class="comment">//用静态数组存放队列元素 </span></span><br><span class="line">	<span class="keyword">int</span> front,rear;<span class="comment">//队头和队尾指针 </span></span><br><span class="line">&#125;SqQueue; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitQueue</span><span class="params">(SqQueue &amp;Q)</span></span>&#123;<span class="comment">//初始化 </span></span><br><span class="line">	Q.rear=Q.front=<span class="number">0</span>;<span class="comment">//初始时，队头、队尾指针指向0 </span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">QueueEmpty</span><span class="params">(SqQueue Q)</span></span>&#123;<span class="comment">//判空 </span></span><br><span class="line">	<span class="keyword">if</span>(Q.rear==Q.front)<span class="comment">//队空条件 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">////此入队操作请移步循环队列的入队操作（下面的入队算法仅供参考） </span></span><br><span class="line"><span class="comment">//bool EnQueue(SqQueue &amp;Q,ElemType e)&#123;//入队 </span></span><br><span class="line"><span class="comment">//	if(Q.rear==MaxSize-1)//队满上溢出  注意：此时队满条件设置可能会导致假溢出 </span></span><br><span class="line"><span class="comment">//	    return false;</span></span><br><span class="line"><span class="comment">//	Q.rear++;//队尾+1 </span></span><br><span class="line"><span class="comment">//	Q.data[Q.rear]=e;//队尾位置插入元素e </span></span><br><span class="line"><span class="comment">//	</span></span><br><span class="line"><span class="comment">//	return true;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">////此出队操作请移步循环队列的出队操作（下面的出队算法仅供参考）</span></span><br><span class="line"><span class="comment">//bool DeQueue(SqQueue &amp;Q,ElemType &amp;e)&#123;//出队 </span></span><br><span class="line"><span class="comment">//	if(Q.front==Q.rear)</span></span><br><span class="line"><span class="comment">//	    return false;</span></span><br><span class="line"><span class="comment">//	    </span></span><br><span class="line"><span class="comment">//	Q.front++;</span></span><br><span class="line"><span class="comment">//	e=Q.data[Q.front];</span></span><br><span class="line"><span class="comment">//	return true;</span></span><br><span class="line"><span class="comment">//	</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//void DispSq(SqQueue Q)&#123;//输出 </span></span><br><span class="line"><span class="comment">//	for(int i=0;i&lt;MaxSize;i++)</span></span><br><span class="line"><span class="comment">//	    printf(&quot;第%d个元素=%d\n&quot;,i+1,Q.data[i]);</span></span><br><span class="line"><span class="comment">//	</span></span><br><span class="line"><span class="comment">//&#125; </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	SqQueue Q;</span><br><span class="line">	InitQueue(Q);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/12/" data-id="ckg81edr20004cocq2513e7sz" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-11" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/11/11/">11链栈带头结点</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/11/11/" class="article-date">
-  <time datetime="2020-10-10T16:09:00.000Z" itemprop="datePublished">2020-10-11</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、进栈、出栈、取栈顶元素、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span>&#123;</span></span><br><span class="line">	ElemType data;<span class="comment">//数据域 </span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LinkNode</span> *<span class="title">next</span>;</span><span class="comment">//指针域 </span></span><br><span class="line">&#125;LiStackNode,*LiStack;<span class="comment">//栈类型定义</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitStack</span><span class="params">(LiStack &amp;S)</span></span>&#123;<span class="comment">//初始化 </span></span><br><span class="line">    S=(LiStack)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LiStackNode));</span><br><span class="line">	S-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">StackEmpty</span><span class="params">(LiStack S)</span></span>&#123;<span class="comment">//判空 </span></span><br><span class="line">	<span class="keyword">if</span>(S-&gt;next==<span class="literal">NULL</span>)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Push</span><span class="params">(LiStack &amp;S,ElemType e)</span></span>&#123;<span class="comment">//进栈（类似于单链表头插法） </span></span><br><span class="line">	LiStackNode *p=(LiStackNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LiStackNode));<span class="comment">//新建结点p </span></span><br><span class="line">	</span><br><span class="line">	p-&gt;data=e;</span><br><span class="line">	p-&gt;next=S-&gt;next;</span><br><span class="line">	S-&gt;next=p;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Pop</span><span class="params">(LiStack &amp;S,ElemType &amp;e)</span></span>&#123;<span class="comment">//出栈 </span></span><br><span class="line">	LiStackNode *p=(LiStackNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LiStackNode));<span class="comment">//新建结点p </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(S-&gt;next==<span class="literal">NULL</span>)<span class="comment">//栈空返回false </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	p=S-&gt;next;<span class="comment">//p取第一个结点 </span></span><br><span class="line">	e=p-&gt;data;<span class="comment">//提取第一个结点的值 </span></span><br><span class="line">	S-&gt;next=p-&gt;next;<span class="comment">//S的next指针指向p结点（此时p结点为第一个结点）的下一个结点</span></span><br><span class="line">	<span class="built_in">free</span>(p); </span><br><span class="line">		</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">GetTop</span><span class="params">(LiStack S,ElemType &amp;e)</span></span>&#123;<span class="comment">//取栈顶元素 </span></span><br><span class="line">	<span class="keyword">if</span>(S-&gt;next==<span class="literal">NULL</span>)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	e=S-&gt;next-&gt;data;<span class="comment">//提取第一个结点的值 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispStack</span><span class="params">(LiStack S)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line"> 	LiStackNode *p=S-&gt;next;<span class="comment">//定义一个结点指针p指向头结点的下一个结点</span></span><br><span class="line"> 	</span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123; <span class="comment">//如果p不为空则循环</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;第%d个元素为%d\n&quot;</span>,i,p-&gt;data);</span><br><span class="line">		p=p-&gt;next;<span class="comment">//移动指针p遍历链表</span></span><br><span class="line">		i++;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LiStack S;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	Push(S,<span class="number">1</span>);</span><br><span class="line">	Push(S,<span class="number">2</span>);</span><br><span class="line">	DispStack(S);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/11/" data-id="ckg81edqy0001cocqc49b1clu" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-10" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/11/10/">10共享栈</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/11/10/" class="article-date">
-  <time datetime="2020-10-10T16:08:00.000Z" itemprop="datePublished">2020-10-11</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType data[MaxSize];<span class="comment">//静态数组存放栈中元素 </span></span><br><span class="line">	<span class="keyword">int</span> top0;<span class="comment">//0号栈顶元素 </span></span><br><span class="line">	<span class="keyword">int</span> top1;<span class="comment">//1号栈顶元素 </span></span><br><span class="line">&#125;ShStack;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitStack</span><span class="params">(ShStack &amp;S)</span></span>&#123;<span class="comment">//初始化共享栈 </span></span><br><span class="line">	S.top0=<span class="number">-1</span>;</span><br><span class="line">	S.top1=MaxSize; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//注意：</span></span><br><span class="line"><span class="comment">//栈满条件：S.top0+1==S.top1 </span></span><br><span class="line"><span class="comment">//栈空条件：S.top0==-1;S.top1=MaxSize;</span></span><br><span class="line"><span class="comment">//元素x0进栈操作：S.top0++;S.data[S.top0]=x;</span></span><br><span class="line"><span class="comment">//元素x1进栈操作：S.top1--;S.data[S.top1]=x;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//元素x0出栈操作：x=S.data[S.top0];S.top0--;</span></span><br><span class="line"><span class="comment">//元素x0出栈操作：x=S.data[S.top1];S.top1++; </span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ShStack S;</span><br><span class="line">	InitStack(S);</span><br><span class="line">	<span class="comment">//... </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/10/" data-id="ckg81edr10003cocqbmykfwww" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-9" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/10/9/">9顺序栈</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/10/9/" class="article-date">
-  <time datetime="2020-10-09T16:11:40.000Z" itemprop="datePublished">2020-10-10</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、新元素入栈、出栈、读栈顶元素 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	ElemType data[MaxSize];<span class="comment">//静态数组存放栈中元素 </span></span><br><span class="line">	<span class="keyword">int</span> top;<span class="comment">//栈顶指针 </span></span><br><span class="line">&#125;SqStack; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitStack</span><span class="params">(SqStack &amp;S)</span></span>&#123;<span class="comment">//初始化 </span></span><br><span class="line">	S.top=<span class="number">-1</span>;<span class="comment">//初始化栈顶指针 </span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//栈顶指针：S.top</span></span><br><span class="line"><span class="comment">//初始化：S.top=-1</span></span><br><span class="line"><span class="comment">//栈顶元素：S.data[S.top] </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">StackEmpty</span><span class="params">(SqStack S)</span></span>&#123;<span class="comment">//判断栈空 </span></span><br><span class="line">	<span class="keyword">if</span>(S.top==<span class="number">-1</span>)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Push</span><span class="params">(SqStack &amp;S,ElemType x)</span></span>&#123;<span class="comment">//新元素入栈 </span></span><br><span class="line">	<span class="keyword">if</span>(S.top==MaxSize<span class="number">-1</span>)<span class="comment">//栈满，报错 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	S.top=S.top+<span class="number">1</span>;<span class="comment">//指针（先）加1 </span></span><br><span class="line">	S.data[S.top]=x;<span class="comment">//新元素（再）入栈    注意：这两句可写成S.data[++S.top]=x; </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Pop</span><span class="params">(SqStack &amp;S,ElemType &amp;x)</span></span>&#123;<span class="comment">//出栈 </span></span><br><span class="line">	<span class="keyword">if</span>(S.top==<span class="number">-1</span>)<span class="comment">//栈空，报错 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	x=S.data[S.top];<span class="comment">//栈顶元素（先）出栈 </span></span><br><span class="line">	S.top=S.top<span class="number">-1</span>;<span class="comment">//指针（再）减1           注意：这两句可写成x=S.data[S.top--];</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">GetTop</span><span class="params">(SqStack S,ElemType &amp;x)</span></span>&#123;<span class="comment">//读栈顶元素 </span></span><br><span class="line">	<span class="keyword">if</span>(S.top==<span class="number">-1</span>)<span class="comment">//栈空，报错 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	x=S.data[S.top];<span class="comment">//x记录栈顶元素     </span></span><br><span class="line">	<span class="comment">//注意：此处跟出栈的区别：读栈顶x=S.data[S.top]; 出栈：x=S.data[S.top--]; </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	SqStack S;</span><br><span class="line">	<span class="comment">//... </span></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/9/" data-id="ckg81edrj000ycocqcyaggue1" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" rel="tag">栈和队列</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-8" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/10/8/">8静态链表</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/10/8/" class="article-date">
-  <time datetime="2020-10-09T16:10:40.000Z" itemprop="datePublished">2020-10-10</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="keyword">int</span> next;</span><br><span class="line">&#125;SLinkList[MaxSize];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	SLinkList L;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/8/" data-id="ckg81edri000wcocqhjnc07dl" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="tag">线性表</a></li></ul>
 
                                     </footer>
 
@@ -677,7 +677,7 @@
   
     
       <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next</a>
       </nav>
     
   </section>
