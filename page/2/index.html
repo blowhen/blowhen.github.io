@@ -62,6 +62,67 @@
       <h1 class="page-type-title"></h1>
       
         
+          <article id="post-16" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/13/16/">16顺序串</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/10/13/16/" class="article-date">
+  <time datetime="2020-10-12T16:01:00.000Z" itemprop="datePublished">2020-10-13</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+
+                                                
+                                                                    <p>数据结构持续总结ing</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成串、求子串、比较、求串长、定位、输出 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSzie 255<span class="comment">//预定义最大串长为255</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span><span class="comment">//静态数组实现（定长顺序存储） </span></span><br><span class="line">	<span class="keyword">char</span> data[MaxSzie];<span class="comment">//每个分量存储一个字符 </span></span><br><span class="line">	<span class="keyword">int</span> length;<span class="comment">//串的实际长度 </span></span><br><span class="line">&#125;SString;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//typedef struct&#123;//动态数组实现（堆分配存储） </span></span><br><span class="line"><span class="comment">//	char *ch;//按串长分配存储区，ch指向串的基地址 </span></span><br><span class="line"><span class="comment">//	int length;</span></span><br><span class="line"><span class="comment">//&#125;HString; </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//HString S; </span></span><br><span class="line"><span class="comment">//S.ch=(char *)malloc(MaxSize*sizeof(char));</span></span><br><span class="line"><span class="comment">//S.length=0; </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StrAssign</span><span class="params">(SString &amp;S,<span class="keyword">char</span> ch[])</span></span>&#123;<span class="comment">//生成串 </span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;ch[i]!=<span class="string">&#x27;\0&#x27;</span>;i++)<span class="comment">//串不为空则赋值 </span></span><br><span class="line">	    S.data[i]=ch[i];</span><br><span class="line">	</span><br><span class="line">	S.length=i;<span class="comment">//设置串的长度 </span></span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function">SString <span class="title">SubString</span><span class="params">(SString &amp;Sub,SString S,<span class="keyword">int</span> pos,<span class="keyword">int</span> len)</span></span>&#123;<span class="comment">//求子串（用Sub返回串S的第pos个字符起长度为len的子串）</span></span><br><span class="line">	<span class="keyword">int</span> k;</span><br><span class="line">	Sub.length=<span class="number">0</span>;<span class="comment">//设置Sub为空串 </span></span><br><span class="line">	<span class="keyword">if</span>(pos&lt;=<span class="number">0</span>||pos&gt;S.length||len&lt;<span class="number">0</span>||+len<span class="number">-1</span>&gt;S.length)<span class="comment">//位序=下标+1   下标=位序-1   （1&lt;=i&lt;=length） </span></span><br><span class="line">	    <span class="keyword">return</span> Sub;<span class="comment">//参数不正确返回空串 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(k=pos<span class="number">-1</span>;k&lt;pos+len<span class="number">-1</span>;k++)<span class="comment">//将S.data[pos...pos+len-1]复制到Sub </span></span><br><span class="line">	    Sub.data[k-pos+<span class="number">1</span>]=S.data[k];</span><br><span class="line">	</span><br><span class="line">	Sub.length=len;</span><br><span class="line">	<span class="keyword">return</span> Sub;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StrCompare</span><span class="params">(SString S,SString T)</span></span>&#123;<span class="comment">//比较操作。若S&gt;T,返回值&gt;0;S=T,返回值=0；若S&lt;T，返回值&lt;0 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;S.length &amp;&amp; i&lt;T.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(S.data[i]!=T.data[i])</span><br><span class="line">		    <span class="keyword">return</span> S.data[i]-T.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> S.length-T.length;<span class="comment">//扫描过的所有字符都相同，则长度长的串更大 </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StrLength</span><span class="params">(SString S)</span></span>&#123;<span class="comment">//求串长 </span></span><br><span class="line">	<span class="keyword">return</span> S.length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Index</span><span class="params">(SString S,SString T)</span></span>&#123;<span class="comment">//定位操作，若主串S中存中与串T相同的子串，则返回他在主串S第一次出现的位置，否则返回0 </span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">1</span>,n=StrLength(S),m=StrLength(T);</span><br><span class="line">	SString Sub;<span class="comment">//用于暂存子串</span></span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">while</span>(i&lt;=n-m+<span class="number">1</span>)&#123;</span><br><span class="line">		SubString(Sub,S,i,m);</span><br><span class="line">		<span class="keyword">if</span>(StrCompare(Sub,T)!=<span class="number">0</span>)</span><br><span class="line">		    ++i;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		    <span class="keyword">return</span> i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DispStr</span><span class="params">(SString S)</span></span>&#123;<span class="comment">//输出 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;S.length;i++)</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">&quot;第%d个元素=%c\n&quot;</span>,i+<span class="number">1</span>,S.data[i]);</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	SString Sub,S;</span><br><span class="line">	<span class="keyword">char</span> ch[<span class="number">10</span>]=<span class="string">&quot;fsdgsd&quot;</span>;</span><br><span class="line">	StrAssign(S,ch);</span><br><span class="line">	SubString(Sub,S,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">	DispStr(S);</span><br><span class="line">	DispStr(Sub);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://blowhen.cn/2020/10/13/16/" data-id="ckgdrgi1k000ciscqe4q89y5n" class="article-share-link">
+                                            Share
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%B2/" rel="tag">串</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
           <article id="post-15" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
@@ -107,7 +168,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/12/15/" data-id="ckgcc51ba000ci8cq18kv53c8" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/12/15/" data-id="ckgdrgi1h0009iscq2o7ggor1" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -168,7 +229,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/14/" data-id="ckgcc51b60008i8cq2vx1fd62" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/14/" data-id="ckgdrgi1g0008iscq4jma9sfv" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -229,7 +290,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/13/" data-id="ckgcc51b40005i8cqafobex2g" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/13/" data-id="ckgdrgi1f0005iscqgibx9r6n" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -290,7 +351,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/12/" data-id="ckgcc51b30004i8cq3oq56jcj" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/12/" data-id="ckgdrgi1e0004iscqbgbj7iqa" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -351,7 +412,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/11/" data-id="ckgcc51ax0001i8cqhdc8hofa" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/11/" data-id="ckgdrgi1d0003iscqclsk0xsb" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -412,7 +473,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/11/10/" data-id="ckgcc51b20003i8cq7lhn1gxo" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/11/10/" data-id="ckgdrgi190001iscq2tem5f7g" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -473,7 +534,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/9/" data-id="ckgcc51bm0010i8cq9axi7v3r" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/9/" data-id="ckgdrgi1y0012iscq7v172y2s" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -534,7 +595,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/8/" data-id="ckgcc51bl000wi8cqfhlhbivo" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/8/" data-id="ckgdrgi1w000xiscq2zex9uq1" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -595,68 +656,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/7/" data-id="ckgcc51bj000ti8cq81vl5d0q" class="article-share-link">
-                                            Share
-                                        </a>
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="tag">线性表</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-6" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/10/10/6/">6循环单链表</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/2020/10/10/6/" class="article-date">
-  <time datetime="2020-10-09T16:08:49.000Z" itemprop="datePublished">2020-10-10</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-
-                                                
-                                                                    <p>数据结构持续总结ing</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化、判空、判断结点p是否为循环单链表的表尾结点 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;//malloc,free函数库</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;<span class="comment">//int另命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LNode,*LinkList;<span class="comment">//单链表定义 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">InitList</span><span class="params">(LinkList &amp;L)</span></span>&#123;<span class="comment">//初始化一个循环单链表 </span></span><br><span class="line">	L=(LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));<span class="comment">//分配一个头结点 </span></span><br><span class="line">	<span class="keyword">if</span>(L==<span class="literal">NULL</span>)<span class="comment">//内存不足，分配失败 </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	L-&gt;next=L;<span class="comment">//头结点next指向头结点 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isTail</span><span class="params">(LinkList L,LNode *p)</span></span>&#123;<span class="comment">//判断结点p是否为循环单链表的表尾结点 </span></span><br><span class="line">	<span class="keyword">if</span>(p-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Empty</span><span class="params">(LinkList L)</span></span>&#123;<span class="comment">//判断循环单链表是否为空 </span></span><br><span class="line">	<span class="keyword">if</span>(L-&gt;next==L)</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	    </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	LinkList L;</span><br><span class="line">	InitList(L);</span><br><span class="line">	<span class="comment">//... </span></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-<p>详见个人CSDN:<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44367041">https://blog.csdn.net/weixin_44367041</a></p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <a data-url="http://blowhen.cn/2020/10/10/6/" data-id="ckgcc51bh000oi8cqhixcdfug" class="article-share-link">
+                                        <a data-url="http://blowhen.cn/2020/10/10/7/" data-id="ckgdrgi1t000siscq2hhp7o0l" class="article-share-link">
                                             Share
                                         </a>
                                         
